@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='kanban.css') }}">
+
+    <style>
+      .middle_box {
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+
+         height:80vh;
+         width:80vw;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="middle_box">
+            <div class="row">
+                <div class="card col" style="width: 18rem; margin: 5px">
+                  <div class="card-header">
+                    To Do
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{update_todo}}</li>
+                  </ul>
+                </div>
+                <div class="card col" style="width: 18rem; margin: 5px">
+                  <div class="card-header">
+                    Doing
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{update_doing}}</li>
+                  </ul>
+                </div>
+                <div class="card col" style="width: 18rem; margin: 5px">
+                  <div class="card-header">
+                    Done
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{update_done}}</li>
+                  </ul>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px; margin-left: 3px">
+              <div class="col">
+                <form method="post" action="{{ url_for('form_update') }}">
+                  <div class="form-group">
+                    <label for="taskname">Task Name</label>
+                    <input type="text" class="form-control" id="taskname" name="taskname" placeholder="Enter task">
+                  </div>
+                  <div class="form-group">
+                    <label for="taskdescription">Description</label>
+                    <textarea class="form-control" id="taskdescription" name="taskdescription" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="taskcategory">Category</label>
+                    <select class="form-control" id="taskcategory" name="taskcategory">
+                      <option>To Do</option>
+                      <option>Doing</option>
+                      <option>Done</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
