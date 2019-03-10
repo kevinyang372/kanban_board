@@ -33,7 +33,10 @@
                     {% for todo in update_todo %}
                       <li class="list-group-item">
                         <span style="float:left">{{todo['taskname']}}</span>
-                        <span style="float:right">{{todo['completedate'][:10]}}</span>
+                        <span style="float:right">
+                          {{todo['completedate'][:10]}}
+                          <a href="{{ url_for('move_task', task_id=todo['id'], category='Doing' ) }}">&#8594;</a>
+                        </span>
                       </li>
                     {% endfor %}
                   </ul>
@@ -45,8 +48,14 @@
                   <ul class="list-group list-group-flush">
                     {% for doing in update_doing %}
                       <li class="list-group-item">
-                        <span style="float:left">{{doing['taskname']}}</span>
-                        <span style="float:right">{{doing['completedate'][:10]}}</span>
+                        <span style="float:left">
+                          <a href="{{ url_for('move_task', task_id=doing['id'], category='todo' ) }}">&#8592;</a>
+                          {{doing['taskname']}}
+                        </span>
+                        <span style="float:right">
+                          {{doing['completedate'][:10]}}
+                          <a href="{{ url_for('move_task', task_id=doing['id'], category='Done' ) }}">&#8594;</a>
+                        </span>
                       </li>
 
                     {% endfor %}
@@ -59,7 +68,10 @@
                   <ul class="list-group list-group-flush">
                     {% for done in update_done %}
                       <li class="list-group-item">
-                        <span style="float:left">{{done['taskname']}}</span>
+                        <span style="float:left">
+                          <a href="{{ url_for('move_task', task_id=done['id'], category='Doing' ) }}">&#8592;</a>
+                          {{done['taskname']}}
+                        </span>
                         <span style="float:right">{{done['completedate'][:10]}}</span>
                       </li>
                     {% endfor %}

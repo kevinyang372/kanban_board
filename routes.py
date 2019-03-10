@@ -23,7 +23,7 @@ class Task(db.Model):
 
 class TaskSchema(ma.Schema):
     class Meta:
-        fields = ('taskname', 'completedate','category')
+        fields = ('id','taskname', 'completedate','category')
 
 task_schema = TaskSchema()
 tasks_schema = TaskSchema(many=True)
@@ -59,6 +59,17 @@ def form_update():
     db.session.add(new_task)
     db.session.commit()
 
+    return redirect(url_for('form'))
+
+@app.route('/move_task/<task_id>/<category>', methods=['GET'])
+def move_task(task_id, category):
+    task = Task.query.get(task_id)
+    if category == 'todo':
+        task.category = 'To Do'
+    else:
+        task.category = category
+
+    db.session.commit()
     return redirect(url_for('form'))
 
 if __name__ == "__main__":
