@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -34,10 +35,18 @@ def form():
 
 @app.route('/form_update', methods=['GET', 'POST'])
 def form_update():
+    taskname = request.form['taskname']
+    completedate = datetime.strptime(request.form['completedate'], '%Y-%m-%d')
+    taskcategory = request.form['taskcategory']
 
-    if request.form['taskcategory'] == "To Do":
+    new_task = Task(taskname, completedate, taskcategory)
+
+    db.session.add(new_task)
+    db.session.commit()
+
+    if taskcategory == "To Do":
         return render_template('kanban.html', update_todo=request.form['taskname'])
-    elif request.form['taskcategory'] == "Doing":
+    elif taskcategory == "Doing":
         return render_template('kanban.html', update_doing=request.form['taskname'])
     else:
         return render_template('kanban.html', update_done=request.form['taskname'])
