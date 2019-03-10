@@ -26,7 +26,9 @@
                     To Do
                   </div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{update_todo}}</li>
+                    {% for todo in update_todo %}
+                      <li class="list-group-item">{{todo['taskname']}}</li>
+                    {% endfor %}
                   </ul>
                 </div>
                 <div class="card col" style="width: 18rem; margin: 5px">
@@ -34,7 +36,9 @@
                     Doing
                   </div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{update_doing}}</li>
+                    {% for doing in update_doing %}
+                      <li class="list-group-item">{{doing['taskname']}}</li>
+                    {% endfor %}
                   </ul>
                 </div>
                 <div class="card col" style="width: 18rem; margin: 5px">
@@ -42,7 +46,9 @@
                     Done
                   </div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{update_done}}</li>
+                    {% for done in update_done %}
+                      <li class="list-group-item">{{done['taskname']}}</li>
+                    {% endfor %}
                   </ul>
                 </div>
             </div>

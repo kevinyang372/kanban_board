@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -31,7 +31,22 @@ tasks_schema = TaskSchema(many=True)
 
 @app.route('/', methods=['GET', 'POST'])
 def form():
-    return render_template('kanban.html')
+    all_tasks = Task.query.all()
+    result = tasks_schema.dump(all_tasks).data
+
+    to_do = []
+    doing = []
+    done = []
+    
+    for i in result:
+        if i['category'] == 'To Do':
+            to_do.append(i)
+        elif i['category'] == 'Doing':
+            doing.append(i)
+        else:
+            done.append(i)
+
+    return render_template('kanban.html', update_todo=to_do, update_doing=doing, update_done=done)
 
 @app.route('/form_update', methods=['GET', 'POST'])
 def form_update():
@@ -44,12 +59,7 @@ def form_update():
     db.session.add(new_task)
     db.session.commit()
 
-    if taskcategory == "To Do":
-        return render_template('kanban.html', update_todo=request.form['taskname'])
-    elif taskcategory == "Doing":
-        return render_template('kanban.html', update_doing=request.form['taskname'])
-    else:
-        return render_template('kanban.html', update_done=request.form['taskname'])
+    return redirect(url_for('form'))
 
 if __name__ == "__main__":
     app.run()
