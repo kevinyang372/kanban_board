@@ -39,6 +39,10 @@ def form():
     done = []
     
     for i in result:
+        if datetime.strptime(i['completedate'][:10], '%Y-%m-%d') > datetime.today():
+            i['overdue'] = False
+        else:
+            i['overdue'] = True
         if i['category'] == 'To Do':
             to_do.append(i)
         elif i['category'] == 'Doing':

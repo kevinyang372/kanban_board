@@ -40,7 +40,11 @@
                           <div class="col">
                             <span style="float:left">{{todo['taskname']}}</span>
                             <span style="float:right">
-                              {{todo['completedate'][:10]}}
+                              {% if todo['overdue'] %}
+                                <p style="color:red">{{todo['completedate'][:10]}}</p>
+                              {% else %}
+                                <p style="color:blue">{{todo['completedate'][:10]}}</p>
+                              {% endif %}
                             </span>
                           </div>
                         </div>
@@ -71,7 +75,11 @@
                               {{doing['taskname']}}
                             </span>
                             <span style="float:right">
-                              {{doing['completedate'][:10]}}
+                              {% if doing['overdue'] %}
+                                <p style="color:red">{{doing['completedate'][:10]}}</p>
+                              {% else %}
+                                <p style="color:blue">{{doing['completedate'][:10]}}</p>
+                              {% endif %}
                             </span>
                           </div>
                         </div>
@@ -103,7 +111,13 @@
                             <span style="float:left">
                               {{done['taskname']}}
                             </span>
-                            <span style="float:right">{{done['completedate'][:10]}}</span>
+                            <span style="float:right">
+                              {% if done['overdue'] %}
+                                <p style="color:red">{{done['completedate'][:10]}}</p>
+                              {% else %}
+                                <p style="color:blue">{{done['completedate'][:10]}}</p>
+                              {% endif %}
+                            </span>
                           </div>
                         </div>
                         <div class="row">
