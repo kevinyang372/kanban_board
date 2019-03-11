@@ -88,5 +88,9 @@ def delete_task(task_id):
 
     return redirect(url_for('form'))
 
+@app.route('/calendar', methods=['GET'])
+def calendar():
+    return render_template('calendar.html')
+
 if __name__ == "__main__":
     app.run()

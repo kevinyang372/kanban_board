@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="{{ url_for('static', filename='kanban.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='fullcalendar.min.css') }}" rel='stylesheet' />
+    <link href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}" rel='stylesheet' />
+    <link href="{{ url_for('static', filename='fullcalendar.print.css') }}" rel='stylesheet' media='print' />
+    <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='fullcalendar.min.js') }}"></script>
+<script>
+
+    $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month'
+            },
+            defaultDate: '2019-03-01',
+            editable: true,
+            eventLimit: true,
+            events: {
+                url: 'data',
+                error: function() {
+                    $('#script-warning').show();
+                }
+            },
+        });
+
+    });
+
+</script>
+<style>
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+    }
+
+
+    #calendar {
+        max-width: 700px;
+        margin: 10px auto;
+        padding: 0 10px;
+    }
+
+</style>
+
+</head>
+    <body>
+        <div>
+            <div style="width: 100%;overflow: hidden; margin-top: 1px; margin-left: 2px;">
+                <div id="rightPanel" style="margin-left: 100px; margin-top: 0px;">
+                    <div id='calendar'></div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>

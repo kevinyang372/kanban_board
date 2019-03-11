@@ -71,6 +71,13 @@
                       <li class="list-group-item">
                         <div class="row">
                           <div class="col">
+                            <span style="float:right;">
+                              <a href="{{ url_for('delete_task', task_id=doing['id'] ) }}">&times;</a>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
                             <span style="float:left">
                               {{doing['taskname']}}
                             </span>
@@ -88,7 +95,6 @@
                               <a href="{{ url_for('move_task', task_id=doing['id'], category='todo' ) }}">&#8592;</a>
                           </div>
                           <div class="col center">
-                              <a href="{{ url_for('delete_task', task_id=doing['id'] ) }}">delete</a>
                           </div>
                           <div class="col center">
                               <a href="{{ url_for('move_task', task_id=doing['id'], category='Done' ) }}">&#8594;</a>
