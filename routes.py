@@ -76,5 +76,13 @@ def move_task(task_id, category):
     db.session.commit()
     return redirect(url_for('form'))
 
+@app.route('/delete_task/<task_id>', methods=['GET'])
+def delete_task(task_id):
+    task = Task.query.get(task_id)
+    db.session.delete(task)
+    db.session.commit()
+
+    return redirect(url_for('form'))
+
 if __name__ == "__main__":
     app.run()
