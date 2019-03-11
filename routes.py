@@ -46,6 +46,10 @@ def form():
         else:
             done.append(i)
 
+    to_do.sort(key=lambda r: r['completedate'])
+    doing.sort(key=lambda r: r['completedate'])
+    done.sort(key=lambda r: r['completedate'])
+
     return render_template('kanban.html', update_todo=to_do, update_doing=doing, update_done=done)
 
 @app.route('/form_update', methods=['GET', 'POST'])
