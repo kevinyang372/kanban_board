@@ -92,5 +92,24 @@ def delete_task(task_id):
 def calendar():
     return render_template('calendar.html')
 
+@app.route('/data')
+def return_data():
+    start_date = datetime.strptime(request.args.get('start', ''), '%Y-%m-%d')
+    end_date = datetime.strptime(request.args.get('end', ''), '%Y-%m-%d')
+
+    filtered_tasks = Task.query.filter(Task.completedate > start_date, Task.completedate < end_date).all()
+    result = tasks_schema.dump(filtered_tasks).data
+
+    events = []
+    for i in result:
+        if i['category'] == 'To Do':
+            events.append({'title': i['taskname'], 'start': i['completedate'], 'color': '#1aa3ff'})
+        elif i['category'] == 'Doing':
+            events.append({'title': i['taskname'], 'start': i['completedate'], 'color': '#ff6666'})
+        else:
+            events.append({'title': i['taskname'], 'start': i['completedate'], 'color': '#00b33c'})
+
+    return jsonify(events)
+
 if __name__ == "__main__":
     app.run()
