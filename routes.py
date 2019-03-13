@@ -103,13 +103,22 @@ def return_data():
     events = []
     for i in result:
         if i['category'] == 'To Do':
-            events.append({'title': i['taskname'], 'start': i['completedate'], 'color': '#1aa3ff'})
+            events.append({'id': i['id'], 'title': i['taskname'], 'start': i['completedate'], 'color': '#1aa3ff'})
         elif i['category'] == 'Doing':
-            events.append({'title': i['taskname'], 'start': i['completedate'], 'color': '#ff6666'})
+            events.append({'id': i['id'], 'title': i['taskname'], 'start': i['completedate'], 'color': '#ff6666'})
         else:
-            events.append({'title': i['taskname'], 'start': i['completedate'], 'color': '#00b33c'})
+            events.append({'id': i['id'], 'title': i['taskname'], 'start': i['completedate'], 'color': '#00b33c'})
 
     return jsonify(events)
+
+@app.route('/update_date/<task_id>/<date>', methods=['POST'])
+def update_date(task_id, date):
+    task = Task.query.get(task_id)
+    task.completedate = datetime.strptime(date, '%Y-%m-%d')
+
+    db.session.commit()
+
+    return 'success'
 
 if __name__ == "__main__":
     app.run()

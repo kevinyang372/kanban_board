@@ -5,15 +5,16 @@
     <link href="{{ url_for('static', filename='kanban.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='fullcalendar.min.css') }}" rel='stylesheet' />
     <link href="{{ url_for('static', filename='fullcalendar.print.css') }}" rel='stylesheet' media='print' />
-    <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='fullcalendar.min.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+
 <script>
 
     $(document).ready(function() {
 
         $('#calendar').fullCalendar({
-            displayEventTime: false,
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -28,6 +29,17 @@
                     $('#script-warning').show();
                 }
             },
+            eventDrop: function(event, delta, revertFunc) {
+                if (!confirm("Do you want to reschedule " + event.title + " to " + event.start.format('YYYY-MM-DD') + "?")) {
+                    revertFunc();
+                }
+                else{
+                    $.ajax({
+                      type : 'POST',
+                      url : '/update_date/' + event.id + '/' + event.start.format('YYYY-MM-DD')
+                    });
+                }
+            }
         });
 
     });
