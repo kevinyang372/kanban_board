@@ -23,6 +23,10 @@
       .center {
         text-align: center;
       }
+
+      .task-delete {
+        display: none;
+      }
     </style>
 </head>
 <body>
@@ -52,7 +56,7 @@
                           <div class="col center">
                           </div>
                           <div class="col center">
-                              <a href="{{ url_for('delete_task', task_id=todo['id'] ) }}">delete</a>
+                              <a class="task-delete" href="{{ url_for('delete_task', task_id=todo['id'] ) }}">delete</a>
                           </div>
                           <div class="col center">
                               <a href="{{ url_for('move_task', task_id=todo['id'], category='Doing' ) }}">&#8594;</a>
@@ -88,7 +92,7 @@
                               <a href="{{ url_for('move_task', task_id=doing['id'], category='todo' ) }}">&#8592;</a>
                           </div>
                           <div class="col center">
-                              <a href="{{ url_for('delete_task', task_id=doing['id'] ) }}">delete</a>
+                              <a class="task-delete" href="{{ url_for('delete_task', task_id=doing['id'] ) }}">delete</a>
                           </div>
                           <div class="col center">
                               <a href="{{ url_for('move_task', task_id=doing['id'], category='Done' ) }}">&#8594;</a>
@@ -125,7 +129,7 @@
                               <a href="{{ url_for('move_task', task_id=done['id'], category='Doing' ) }}">&#8592;</a>
                           </div>
                           <div class="col center">
-                              <a href="{{ url_for('delete_task', task_id=done['id'] ) }}">delete</a>
+                              <a class="task-delete" href="{{ url_for('delete_task', task_id=done['id'] ) }}">delete</a>
                           </div>
                           <div class="col center">
                           </div>
@@ -136,7 +140,17 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-info btn-lg addtask-button" data-toggle="modal" data-target="#myModal">Add Task</button>
+            <div class="row" style="width:60%">
+              <div class="col center">
+                <button type="button" class="btn btn-info btn-lg addtask-button" data-toggle="modal" data-target="#myModal">Add Task</button>
+              </div>
+              <div class="col center">
+                <button type="button" id="delete-button" class="btn btn-danger btn-lg addtask-button" onclick="show_all();">Delete</button>
+              </div>
+              <div class="col center">
+                <a href="{{url_for('calendar')}}" class="btn btn-warning btn-lg addtask-button">Calendar</a>
+              </div>
+            </div>
 
         </div>
     </div>
@@ -174,6 +188,30 @@
 
       </div>
     </div>
+
+    <script>
+      function show_all(){
+        var arrayOfElements=document.getElementsByClassName('task-delete');
+        var lengthOfArray=arrayOfElements.length;
+
+        for (var i=0; i<lengthOfArray;i++){
+            arrayOfElements[i].style.display='inline';
+        }
+
+        document.getElementById('delete-button').onclick = hide_all;
+      }
+
+      function hide_all(){
+        var arrayOfElements=document.getElementsByClassName('task-delete');
+        var lengthOfArray=arrayOfElements.length;
+
+        for (var i=0; i<lengthOfArray;i++){
+            arrayOfElements[i].style.display='none';
+        }
+
+        document.getElementById('delete-button').onclick = show_all;
+      }
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

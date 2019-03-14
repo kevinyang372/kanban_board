@@ -9,6 +9,7 @@
     <script src="{{ url_for('static', filename='lib/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='fullcalendar.min.js') }}"></script>
     <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <script>
 
@@ -66,8 +67,11 @@
             <div style="width: 100%; margin-top: 10px;">
                 <div id="rightPanel">
                     <div id='calendar'></div>
-                </div>
+                    <div style="text-align: center; margin: 10px auto;">
+                        <a href="{{url_for('form')}}" class="btn btn-warning btn-lg addtask-button">Index</a>
+                    </div>
             </div>
+                </div>
         </div>
     </body>
 </html>
