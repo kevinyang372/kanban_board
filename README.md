@@ -26,3 +26,9 @@ Start flask server
     $ python routes.py
 
 Your Kanban board should be up and running at http://127.0.0.1:5000/
+
+## Unit Testing
+
+On the project root directory, run
+
+    $ python test_basic.py
