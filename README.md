@@ -9,7 +9,7 @@ Simple Flask Kanban Board for managing your to-do list
 - Switch tasks between three categories: to-do, doing and done
 - Color coding of overdue tasks (red)
 
-![image](https://user-images.githubusercontent.com/30107576/54415532-8a85de80-4722-11e9-8214-6c2ee481700c.png)
+![image](https://user-images.githubusercontent.com/30107576/54415951-e6049c00-4723-11e9-96de-418be5482ad1.png)
 
 - Calendar showing the due date of each task
 - Drag and Drop tasks to change its due date
