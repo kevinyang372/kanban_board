@@ -1,5 +1,6 @@
 # Environment
 .DS_Store
+project/test.sqlite
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
